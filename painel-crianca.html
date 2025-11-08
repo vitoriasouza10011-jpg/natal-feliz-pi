@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Painel da Criança - Natal do Bem</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header class="painel-header">
+    <div class="logo-texto">🎄 Natal do Bem</div>
+    <nav>
+      <a href="index.html#sobre">SOBRE NÓS</a>
+      <a href="index.html#depoimentos">DEPOIMENTOS</a>
+      <a href="index.html#contato">CONTATO</a>
+    </nav>
+
+    <!-- Botão de logout -->
+    <button id="logout" class="btn-logout">Sair</button>
+  </header>
+
+  <main>
+    <section class="painel-crianca">
+      <div class="container-painel">
+        <h2>Bem-vindo(a) ao seu Painel 🎅</h2>
+        <button class="btn-cadastrar-carta">Cadastrar Nova Carta</button>
+
+        <h3>Minhas Cartas</h3>
+        <ul class="lista-cartas">
+          <li>
+            <h4>Carta 1: Brinquedo dos Sonhos</h4>
+            <p>Status: <span class="status aguardando">Aguardando</span></p>
+          </li>
+          <li>
+            <h4>Carta 2: Bola de Futebol</h4>
+            <p>Status: <span class="status adotada">Adotada</span></p>
+          </li>
+          <li>
+            <h4>Carta 3: Livro Infantil</h4>
+            <p>Status: <span class="status entregue">Entregue</span></p>
+          </li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    document.getElementById("logout").addEventListener("click", function() {
+      if (confirm("Deseja realmente sair?")) {
+        window.location.href = "login.html";
+      }
+    });
+  </script>
+
+  <!-- validação -->
+  <script>
+  document.getElementById("cartinhaForm").addEventListener("submit", function(e) {
+    const nome = this.querySelector('input').value.trim();
+    const mensagem = this.querySelector('textarea').value.trim();
+    const status = this.querySelector('select').value;
+
+    if (!nome || !mensagem || !status) {
+      alert("Preencha todos os campos.");
+      e.preventDefault();
+    }
+  });
+</script>
+
+</body>
+</html>

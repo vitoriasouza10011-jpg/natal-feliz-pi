@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Painel do Doador - Natal do Bem</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header>
+    <div class="logo-texto">🎄 Natal do Bem</div>
+    <nav>
+      <a href="index.html#sobre">SOBRE NÓS</a>
+      <a href="index.html#depoimentos">DEPOIMENTOS</a>
+      <a href="index.html#contato">CONTATO</a>
+    </nav>
+
+    <!-- Botão de logout -->
+    <button id="logout" class="btn-logout">Sair</button>
+  </header>
+
+  <main>
+    <section class="painel-doador">
+      <div class="container-painel">
+        <h2>Bem-vindo(a) ao Painel do Doador 🎁</h2>
+
+        <h3>Cartas Disponíveis para Adoção</h3>
+        <ul class="lista-cartas">
+          <li>
+            <h4>Carta de Maria</h4>
+            <p>Desejo: Boneca</p>
+            <button class="btn-acao">Adotar Carta</button>
+          </li>
+          <li>
+            <h4>Carta de João</h4>
+            <p>Desejo: Carrinho</p>
+            <button class="btn-acao">Adotar Carta</button>
+          </li>
+        </ul>
+
+        <h3>Minhas Doações</h3>
+        <ul class="lista-cartas">
+          <li>
+            <h4>Carta de Ana</h4>
+            <p>Status: Pendente</p>
+          </li>
+          <li>
+            <h4>Carta de Pedro</h4>
+            <p>Status: Confirmada</p>
+          </li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    // Botão de logout
+    document.getElementById("logout").addEventListener("click", function() {
+      if (confirm("Deseja realmente sair?")) {
+        window.location.href = "login.html";
+      }
+    });
+
+    // Simulação: clique no botão "Adotar Carta"
+    document.querySelectorAll(".btn-acao").forEach(botao => {
+      botao.addEventListener("click", () => {
+        alert("Carta adotada com sucesso! 🎄");
+      });
+    });
+  </script>
+</body>
+</html>

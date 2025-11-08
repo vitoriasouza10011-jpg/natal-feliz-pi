@@ -1,0 +1,108 @@
+LOGIN
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Título da Página</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <header>
+
+        <!-- cabeçalho-->
+        <div class="logo-texto">🎄 Natal do Bem</div>
+        <nav>
+            <a href="index.html#sobre">SOBRE NÓS</a>
+            <a href="index.html#depoimentos">DEPOIMENTOS</a>
+            <a href="index.html#contato">CONTATO</a>
+        </nav>
+        <button id="logoutBtn" class="btn-logout">Sair</button>
+    </header>
+
+    <!-- login -->
+    <section class="login" id="login">
+        <div class="container-login">
+            <h2>Login</h2>
+            <p class="descricao">Acesse sua conta para continuar</p>
+
+            <form id="loginForm">
+                <label for="email">E-mail:</label>
+                <input type="email" id="email" placeholder="Digite seu e-mail" required>
+
+                <label for="senha">Senha:</label>
+                <input type="password" id="senha" placeholder="Digite sua senha" required>
+
+                <label for="tipo">Tipo de usuário:</label>
+                <select id="tipo" required>
+                    <option value="">Selecione...</option>
+                    <option value="crianca">Criança / Responsável</option>
+                    <option value="doador">Doador</option>
+                </select>
+
+                <button type="submit" class="btn-login">Entrar</button>
+
+                <div class="link-cadastro">
+                    <p>Não tem conta? <a href="index.html#cadastro">Cadastre-se</a></p>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <!-- validação -->
+    <script>
+        document.getElementById("loginForm").addEventListener("submit", function (e) {
+            const email = this.querySelector('input[type="email"]').value.trim();
+            const senha = this.querySelector('input[type="password"]').value;
+
+            if (!email || !senha) {
+                alert("Preencha todos os campos.");
+                e.preventDefault();
+            } else if (!email.includes("@")) {
+                alert("E-mail inválido.");
+                e.preventDefault();
+            }
+        });
+    </script>
+
+    <!-- acessar os paineis -->
+    <script>
+        document.getElementById("loginForm").addEventListener("submit", async function (e) {
+            e.preventDefault();
+            let email = document.getElementById("email").value;
+            let senha = document.getElementById("senha").value;
+
+            let formData = new FormData();
+            formData.append("email", email);
+            formData.append("senha", senha);
+
+            let req = await fetch("backend/login.php", { method: "POST", body: formData });
+            let res = await req.json();
+
+            if (res.status == "success") {
+                localStorage.setItem("id_usuario", res.id_usuario);
+                if (res.tipo === "crianca") window.location.href = "painel-crianca.html";
+                else window.location.href = "painel-doador.html";
+            } else {
+                alert("Login inválido");
+            }
+        });
+    </script>
+
+    <!-- botão logout-->
+    <script>
+        const logoutBtn = document.getElementById("logoutBtn");
+
+        logoutBtn.addEventListener("click", () => {
+            if (confirm("Deseja realmente sair?")) {
+                window.location.href = "login.html";
+            }
+        });
+    </script>
+
+</body>
+
+</html>
