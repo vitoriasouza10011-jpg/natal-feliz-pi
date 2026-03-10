@@ -1,0 +1,354 @@
+/* =========================================
+   VARIÁVEIS E RESET GLOBAL
+   ========================================= */
+:root {
+    --cor-primaria: #c62828; /* Vermelho Natal */
+    --cor-primaria-hover: #b71c1c;
+    --cor-secundaria: #2e7d32; /* Verde Natal */
+    --cor-texto: #333333;
+    --cor-texto-claro: #666666;
+    --cor-fundo: #fafafa;
+    --cor-fundo-secao: #ffffff;
+    --fonte-principal: 'Poppins', sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth; /* Rolagem suave ao clicar nos links do menu */
+}
+
+body {
+    font-family: var(--fonte-principal);
+    background-color: var(--cor-fundo);
+    color: var(--cor-texto);
+    line-height: 1.6;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* =========================================
+   CABEÇALHO (HEADER)
+   ========================================= */
+header {
+    background-color: var(--cor-fundo-secao);
+    padding: 20px 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.logo-texto {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--cor-primaria);
+}
+
+nav {
+    display: flex;
+    gap: 20px;
+}
+
+nav a {
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+nav a:hover {
+    color: var(--cor-primaria);
+}
+
+/* =========================================
+   ESTRUTURA DAS SEÇÕES (PADRÃO)
+   ========================================= */
+section {
+    padding: 80px 5%;
+}
+
+h2 {
+    font-size: 2.5rem;
+    color: var(--cor-primaria);
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.subtitulo {
+    text-align: center;
+    color: var(--cor-texto-claro);
+    margin-bottom: 40px;
+    font-weight: 400;
+}
+
+/* =========================================
+   SOBRE NÓS
+   ========================================= */
+.sobre {
+    background-color: var(--cor-fundo-secao);
+}
+
+.container-sobre {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.texto-sobre p {
+    color: var(--cor-texto-claro);
+    text-align: justify;
+}
+
+/* =========================================
+   PRINCÍPIOS (CARDS)
+   ========================================= */
+.institucional {
+    background-color: var(--cor-fundo);
+}
+
+.cards {
+    display: flex;
+    gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.card {
+    background: var(--cor-fundo-secao);
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    flex: 1;
+    min-width: 300px;
+    transition: transform 0.3s ease;
+    border-top: 4px solid var(--cor-secundaria);
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+.card h3 {
+    color: var(--cor-secundaria);
+    margin-bottom: 15px;
+    font-size: 1.5rem;
+}
+
+.card ul {
+    list-style-position: inside;
+    color: var(--cor-texto-claro);
+}
+
+/* =========================================
+   DEPOIMENTOS (SLIDER BASE)
+   ========================================= */
+.depoimentos {
+    background-color: var(--cor-secundaria);
+    color: #fff;
+}
+
+.depoimentos h2 {
+    color: #fff;
+}
+
+.depoimentos .subtitulo {
+    color: #e0e0e0;
+}
+
+.slider {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+    position: relative;
+}
+
+.slide {
+    display: none; /* Esconde todos por padrão */
+    padding: 20px;
+}
+
+.slide.ativo {
+    display: block; /* Mostra apenas o ativo */
+    animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+blockquote {
+    font-size: 1.3rem;
+    font-style: italic;
+    margin-bottom: 20px;
+    line-height: 1.8;
+}
+
+.autor {
+    font-weight: 700;
+    color: #ffd54f; /* Amarelo ouro para contraste */
+}
+
+/* =========================================
+   CONTATO (FORMULÁRIO)
+   ========================================= */
+.contato .container {
+    display: flex;
+    gap: 50px;
+    max-width: 1000px;
+    margin: 0 auto;
+    background: var(--cor-fundo-secao);
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+}
+
+.info-contato {
+    flex: 1;
+}
+
+.info-contato h2 {
+    text-align: left;
+}
+
+.formulario {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.formulario input,
+.formulario textarea {
+    width: 100%;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-family: var(--fonte-principal);
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+.formulario input:focus,
+.formulario textarea:focus {
+    border-color: var(--cor-primaria);
+}
+
+.formulario textarea {
+    resize: vertical;
+    min-height: 120px;
+}
+
+button {
+    background-color: var(--cor-primaria);
+    color: #fff;
+    padding: 15px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: var(--cor-primaria-hover);
+}
+
+/* =========================================
+   BOTÃO VOLTAR AO TOPO
+   ========================================= */
+#btn-topo {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    z-index: 100;
+}
+
+/* =========================================
+   RODAPÉ (FOOTER)
+   ========================================= */
+.footer {
+    background-color: #1a1a1a;
+    color: #f5f5f5;
+    padding: 60px 5% 20px;
+}
+
+.container-footer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+    justify-content: space-between;
+}
+
+.coluna-footer {
+    flex: 1;
+    min-width: 250px;
+}
+
+.coluna-footer h3,
+.coluna-footer h4 {
+    color: var(--cor-primaria);
+    margin-bottom: 20px;
+}
+
+.coluna-footer ul {
+    list-style: none;
+}
+
+.coluna-footer ul li {
+    margin-bottom: 10px;
+}
+
+.coluna-footer a:hover {
+    color: var(--cor-primaria);
+}
+
+.copy {
+    text-align: center;
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid #333;
+    font-size: 0.9rem;
+    color: #888;
+}
+
+/* =========================================
+   RESPONSIVIDADE (MOBILE)
+   ========================================= */
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .contato .container {
+        flex-direction: column;
+    }
+    
+    .info-contato h2 {
+        text-align: center;
+    }
+}
