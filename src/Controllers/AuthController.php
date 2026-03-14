@@ -16,32 +16,34 @@ class AuthController
         $this->userModel = $user;
     }
 
-    public function viewLogin(Request $request, Response $response){
-        return View::render($response,'login');
+    public function viewLogin(Request $request, Response $response)
+    {
+        return View::render($response, 'login');
     }
 
-    public function viewRegister(Request $request, Response $response){
-        return View::render($response,'register');
+    public function viewRegister(Request $request, Response $response)
+    {
+        return View::render($response, 'register');
     }
-
 
     public function login(Request $request, Response $response)
     {
-
-        dd('TA ERRADO MANO');
-
         $data = $request->getParsedBody();
 
         $user = $this->userModel->findByEmail($data['email']);
 
         if (!$user || !password_verify($data['senha'], $user['senha'])) {
-            $response->getBody()->write("Login inválido");
-            return $response;
+            $response->getBody()->write("Email ou senha inválidos");
+            return $response->withStatus(401);
         }
 
-        $_SESSION['user'] = $user['id'];
+        $_SESSION['user'] = [
+            'id' => $user['id_usuario'],
+            'nome' => $user['nome'],
+            'tipo' => $user['tipo']
+        ];
 
-        $response->getBody()->write("Login realizado");
+        $response->getBody()->write("Login realizado com sucesso");
 
         return $response;
     }
@@ -49,16 +51,28 @@ class AuthController
     public function register(Request $request, Response $response)
     {
         $data = $request->getParsedBody();
-        dd($data);
-        $this->userModel->create(
-            $data['nome'],
-            $data['email'],
-            $data['senha'],
-            $data['tipo']
-        );
 
-        $response->getBody()->write("Usuário criado");
+        try {
 
-        return $response;
+            $id = $this->userModel->create([
+                'nome' => $data['nome'],
+                'idade' => $data['idade'] ?? null,
+                'email' => $data['email'],
+                'senha' => $data['senha'],
+                'tipo' => $data['tipo'],
+                'telefone' => $data['telefone'] ?? null,
+                'endereco' => $data['endereco'] ?? null
+            ]);
+
+            $response->getBody()->write("Usuário criado com ID: " . $id);
+
+            return $response->withStatus(201);
+
+        } catch (\Exception $e) {
+
+            $response->getBody()->write($e->getMessage());
+
+            return $response->withStatus(400);
+        }
     }
 }
