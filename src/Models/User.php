@@ -18,6 +18,7 @@ class User
 
     public function create(array $data): int
     {
+
         if (!in_array($data['tipo'], $this->tiposPermitidos)) {
             throw new \InvalidArgumentException("Tipo de usuário inválido");
         }

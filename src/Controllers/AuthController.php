@@ -30,6 +30,17 @@ class AuthController
     {
         $data = $request->getParsedBody();
 
+        if (!isset($data['email']) || !isset($data['senha'])) {
+
+            $response->getBody()->write(json_encode([
+                'error' => 'Email e senha são obrigatórios'
+            ]));
+
+            return $response
+                ->withStatus(400)
+                ->withHeader('Content-Type', 'application/json');
+        }
+
         $user = $this->userModel->findByEmail($data['email']);
 
         if (!$user || !password_verify($data['senha'], $user['senha'])) {

@@ -6,7 +6,7 @@
                 Preencha as informações abaixo para participar do projeto <strong>Natal do Bem</strong>.
             </p>
 
-            <form class="form-cadastro" method="post" action="/auth/register">
+            <form class="form-cadastro" method="post" action="/register">
 
                 <label for="nome">Nome completo:</label>
                 <input type="text" id="nome" name="nome" placeholder="Digite seu nome completo" required>
