@@ -1,214 +1,172 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
     <meta charset="UTF-8">
     <title><?= $title ?></title>
-    <link rel="stylesheet" href="/assets/css/style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
-<body>
-    <header>
-        <div class="logo-texto"><?= $title ?></div>
-        <nav>
-            <a href="#sobre">SOBRE NÓS</a>
-            <a href="#depoimentos">DEPOIMENTOS</a>
-            <a href="/register">CADASTRO</a>
-            <a href="/login">LOGIN</a>
-            <a href="#contato">CONTATO</a>
-        </nav>
+<body class="bg-green-50 text-gray-800">
+
+    <!-- HEADER -->
+    <header class="bg-white shadow-md fixed w-full top-0 z-50">
+        <div class="max-w-6xl mx-auto flex justify-between items-center p-4">
+            <h1 class="text-xl font-bold text-green-700"><?= $title ?></h1>
+            <nav class="space-x-6 text-sm font-semibold">
+                <a href="#sobre" class="hover:text-green-600">Sobre</a>
+                <a href="#depoimentos" class="hover:text-green-600">Depoimentos</a>
+                <a href="/register" class="hover:text-green-600">Cadastro</a>
+                <a href="/login" class="hover:text-green-600">Login</a>
+                <a href="#contato" class="hover:text-green-600">Contato</a>
+            </nav>
+        </div>
     </header>
 
-    <main>
-        <!-- Sobre Nós-->
-        <section class="sobre" id="sobre">
-            <div class="container-sobre">
-                <div class="texto-sobre">
-                    <h2>Quem Somos Nós</h2>
-                    <h4 class="subtitulo">Compartilhando amor, construindo futuros.</h4>
-                    <p>
-                        O Natal é tempo de esperança e renovação. Para muitas crianças em situação de vulnerabilidade,
-                        essa época pode passar em silêncio — sem presentes,
-                        sem ceia, sem o calor de uma família reunida. Mas com um gesto simples, você pode transformar
-                        essa realidade e reacender sonhos que pareciam esquecidos. <br><br>
+    <!-- ESPAÇO HEADER -->
+    <div class="h-20"></div>
 
-                        Ao apadrinhar uma criança, você oferece mais do que um presente. Você entrega carinho, atenção e
-                        a certeza de que ela importa. Com ações, você diz que o mundo pode ser mais gentil, que ela
-                        merece sonhar e ser lembrada.
-                        A solidariedade é a ponte entre quem pode ajudar e quem precisa ser acolhido — e quando essa
-                        ponte é feita com amor, ela sustenta memórias que duram para sempre. <br><br>
-
-                        O Natal do Bem é uma iniciativa social que conecta corações: o de quem quer ajudar e o de quem
-                        mais precisa.
-                        Aproximamos doadores e crianças em situação de vulnerabilidade, oferecendo uma forma segura e
-                        acolhedora de tornar o Natal um momento de inclusão, empatia e afeto. <br><br>
-
-                        Por meio de cartinhas, doações e apadrinhamentos, o projeto realiza pequenos sonhos e espalha o
-                        verdadeiro espírito natalino. Seja luz no Natal de uma criança.
-                        Doe afeto, espalhe esperança — e descubra que o maior presente é ver um sorriso nascer.
-                    </p>
-                </div>
-            </div>
-        </section>
-        <!-- Seção Empresa -->
-        <section class="institucional" id="institucional">
-            <h2>Princípios que nos Guiam.</h2>
-            <div class="cards">
-                <div class="card">
-                    <h3>Missão</h3>
-                    <p>
-                        Levar alegria, esperança e solidariedade a crianças em situação de vulnerabilidade,
-                        proporcionando uma experiência de Natal verdadeiramente significativa e transformadora.
-                    </p>
-                </div>
-                <div class="card">
-                    <h3>Visão</h3>
-                    <p>
-                        Ser reconhecida como uma referência nacional em ações de solidariedade e inclusão social,
-                        inspirando pessoas e empresas a cultivar o espírito natalino durante todo o ano.
-                    </p>
-                </div>
-                <div class="card">
-                    <h3>Valores</h3>
-                    <ul>
-                        <li>Empatia e solidariedade</li>
-                        <li>Inclusão social e acessibilidade</li>
-                        <li>Transparência e responsabilidade</li>
-                        <li>Ética e compromisso com o bem</li>
-                        <li>Amor e esperança compartilhada</li>
-                    </ul>
-                </div>
-            </div>
-        </section>
-
-        <!-- Seção Depoimentos -->
-        <section class="depoimentos" id="depoimentos">
-            <h2>Depoimentos.</h2>
-            <p class="subtitulo">Histórias reais de quem recebeu e transformou o Natal com amor.</p>
-
-            <div class="slider">
-                <div class="slide ativo">
-                    <blockquote>
-                        “Quando fui apadrinhado, passei algo bom adiante sem desaguar...<br>
-                        Apadrinhei outro ser para que ele possa ser útil, para que ele possa amar,<br>
-                        e outro alguém também possa sentir esse amor que recebi.”
-                    </blockquote>
-                    <p class="autor">– Carlos Henrique</p>
-                </div>
-
-                <div class="slide">
-                    <blockquote>
-                        “O Natal do Bem me ensinou que a magia não vem das luzes ou dos presentes, mas dos encontros.”
-                    </blockquote>
-                    <p class="autor">– Juliana Ribeiro</p>
-                </div>
-
-                <div class="slide">
-                    <blockquote>
-                        “Quando li a cartinha da Maria, não consegui segurar as lágrimas.”
-                    </blockquote>
-                    <p class="autor">– Ana Paula</p>
-                </div>
-            </div>
-    </main>
-
-
-    <!-- Contato -->
-    <section class="contato" id="contato">
-        <div class="container">
-            <div class="info-contato">
-                <h2>Contato.</h2>
-                <p>Entre em contato conosco ou envie um e-mail para <br><strong>nataldobem.com</strong></p>
-                <p>Se preferir, preencha o formulário ao lado.</p>
-            </div>
-
-            <form class="formulario">
-                <input type="text" placeholder="Nome" required>
-                <input type="email" placeholder="Email" required>
-                <input type="tel" placeholder="Telefone">
-                <textarea placeholder="Digite sua mensagem aqui..." required></textarea>
-                <button type="submit">Enviar</button>
-            </form>
+    <!-- SOBRE -->
+    <section id="sobre" class="py-16">
+        <div class="max-w-4xl mx-auto text-center px-4">
+            <h2 class="text-3xl font-bold text-green-700 mb-4">Quem Somos</h2>
+            <p class="text-gray-600 leading-relaxed">
+                O Natal do Bem conecta doadores e crianças em situação de vulnerabilidade,
+                transformando sonhos em realidade através de gestos simples de amor e solidariedade.
+                <br><br>
+                Ao apadrinhar uma criança, você entrega mais do que um presente: oferece esperança,
+                carinho e um futuro mais acolhedor.
+            </p>
         </div>
     </section>
 
-    <button id="btn-topo" title="Voltar ao topo">↑</button>
+    <!-- PRINCÍPIOS -->
+    <section id="institucional" class="py-16 bg-white">
+        <div class="max-w-6xl mx-auto px-4 text-center">
+            <h2 class="text-3xl font-bold text-green-700 mb-10">Nossos Princípios</h2>
 
-    <!-- Botao topo-->
-    <script>
-        const btnTopo = document.getElementById("btn-topo");
+            <div class="grid md:grid-cols-3 gap-6">
 
-        btnTopo.addEventListener("click", () => {
-            window.scrollTo({ top: 0, behavior: "smooth" });
-        });
-    </script>
+                <div class="bg-green-50 p-6 rounded-xl shadow">
+                    <h3 class="font-bold text-lg mb-2">Missão</h3>
+                    <p class="text-sm text-gray-600">
+                        Levar alegria e esperança a crianças através do espírito natalino.
+                    </p>
+                </div>
 
-    <!-- Cadastro de usuario -->
-    <script>
-        document.querySelector(".form-cadastro").addEventListener("submit", async function (e) {
-            e.preventDefault();
-            
-            let formData = new FormData();
-            formData.append("nome", document.getElementById("nome").value);
-            formData.append("idade", document.getElementById("idade").value);
-            formData.append("email", document.getElementById("email").value);
-            formData.append("senha", document.getElementById("senha").value);
-            formData.append("tipo", document.getElementById("tipo").value);
-            formData.append("endereco", document.getElementById("endereco").value);
-            formData.append("telefone", document.getElementById("telefone").value);
+                <div class="bg-green-50 p-6 rounded-xl shadow">
+                    <h3 class="font-bold text-lg mb-2">Visão</h3>
+                    <p class="text-sm text-gray-600">
+                        Ser referência em solidariedade e inclusão social.
+                    </p>
+                </div>
 
-            try {
-                let req = await fetch("backend/cadastrar_usuario.php", { method: "POST", body: formData });
-                let res = await req.json();
+                <div class="bg-green-50 p-6 rounded-xl shadow">
+                    <h3 class="font-bold text-lg mb-2">Valores</h3>
+                    <ul class="text-sm text-gray-600 space-y-1">
+                        <li>Empatia</li>
+                        <li>Transparência</li>
+                        <li>Amor</li>
+                        <li>Inclusão</li>
+                    </ul>
+                </div>
 
-                if (res.status == "success") {
-                    alert("Cadastro realizado com sucesso! Faça login para continuar.");
-                    window.location.href = "/login";
-            <button type="submit">Entrar</button>
-                } else {
-                    alert("Erro ao cadastrar: " + (res.mensagem || "Tente novamente"));
-                }
-            } catch (error) {
-                alert("Erro ao realizar cadastro. Verifique sua conexão.");
-            }
-        });
-    </script>
+            </div>
+        </div>
+    </section>
 
-    <footer class="footer">
-        <div class="container-footer">
-            <div class="coluna-footer">
-                <h3>Natal do Bem</h3>
-                <p>
-                    Espalhando esperança e amor através da solidariedade.<br>
-                    Faça parte dessa corrente do bem.
+    <!-- DEPOIMENTOS -->
+    <section id="depoimentos" class="py-16">
+        <div class="max-w-4xl mx-auto text-center px-4">
+            <h2 class="text-3xl font-bold text-green-700 mb-4">Depoimentos</h2>
+            <p class="text-gray-500 mb-8">Histórias reais de transformação</p>
+
+            <div class="space-y-6">
+
+                <div class="bg-white p-6 rounded-xl shadow">
+                    <p class="italic">
+                        “Quando fui apadrinhado, senti que alguém acreditava em mim.”
+                    </p>
+                    <span class="block mt-2 font-semibold">– Carlos Henrique</span>
+                </div>
+
+                <div class="bg-white p-6 rounded-xl shadow">
+                    <p class="italic">
+                        “A magia do Natal está no amor compartilhado.”
+                    </p>
+                    <span class="block mt-2 font-semibold">– Juliana Ribeiro</span>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTATO -->
+    <section id="contato" class="py-16 bg-white">
+        <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-10 px-4">
+
+            <div>
+                <h2 class="text-3xl font-bold text-green-700 mb-4">Contato</h2>
+                <p class="text-gray-600 mb-4">
+                    Entre em contato conosco ou envie um e-mail para:
+                </p>
+                <p class="font-semibold text-green-700">nataldobem@gmail.com</p>
+            </div>
+
+            <form class="space-y-4">
+                <input type="text" placeholder="Nome" required
+                    class="w-full p-2 border rounded-lg focus:ring-2 focus:ring-green-400 outline-none">
+
+                <input type="email" placeholder="Email" required
+                    class="w-full p-2 border rounded-lg focus:ring-2 focus:ring-green-400 outline-none">
+
+                <textarea placeholder="Mensagem" required
+                    class="w-full p-3 border rounded-lg focus:ring-2 focus:ring-green-400 outline-none"></textarea>
+
+                <button class="w-full bg-green-600 text-white py-2 rounded-lg hover:bg-green-700 transition">
+                    Enviar
+                </button>
+            </form>
+
+        </div>
+    </section>
+
+    <!-- BOTÃO TOPO -->
+    <button onclick="window.scrollTo({top:0, behavior:'smooth'})"
+        class="fixed bottom-5 right-5 bg-green-600 text-white px-3 py-2 rounded-full shadow-lg hover:bg-green-700">
+        ↑
+    </button>
+
+    <!-- FOOTER -->
+    <footer class="bg-green-700 text-white mt-10">
+        <div class="max-w-6xl mx-auto grid md:grid-cols-3 gap-6 p-6">
+
+            <div>
+                <h3 class="font-bold mb-2">Natal do Bem</h3>
+                <p class="text-sm">
+                    Espalhando esperança e amor.
                 </p>
             </div>
 
-            <div class="coluna-footer">
-                <h4>Links Rápidos</h4>
-                <ul>
-                    <li><a href="/#sobre">Sobre Nós</a></li>
-                    <li><a href="/#depoimentos">Depoimentos</a></li>
-                    <li><a href="/#cadastro">Cadastro</a></li>
+            <div>
+                <h4 class="font-semibold mb-2">Links</h4>
+                <ul class="text-sm space-y-1">
+                    <li><a href="#sobre">Sobre</a></li>
                     <li><a href="/login">Login</a></li>
-                    <li><a href="/#contato">Contato</a></li>
+                    <li><a href="/register">Cadastro</a></li>
                 </ul>
             </div>
 
-            <div class="coluna-footer">
-                <h4>Contato</h4>
-                <p>Email: <a href="mailto:nataldobem@gmail.com">nataldobem@gmail.com</a></p>
-                <p>Telefone: (11) 99999-9999</p>
-                <p>Endereço: São Paulo - SP</p>
+            <div>
+                <h4 class="font-semibold mb-2">Contato</h4>
+                <p class="text-sm">nataldobem@gmail.com</p>
             </div>
+
         </div>
 
-        <div class="copy">
-            <p>&copy; 2025 Natal do Bem. Todos os direitos reservados.</p>
+        <div class="text-center text-sm py-3 bg-green-800">
+            © 2025 Natal do Bem
         </div>
     </footer>
 
 </body>
-
 </html>

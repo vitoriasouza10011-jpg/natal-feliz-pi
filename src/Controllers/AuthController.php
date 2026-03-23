@@ -29,7 +29,6 @@ class AuthController
     public function login(Request $request, Response $response)
     {
         $data = $request->getParsedBody();
-
         if (!isset($data['email']) || !isset($data['senha'])) {
 
             $response->getBody()->write(json_encode([
@@ -42,7 +41,7 @@ class AuthController
         }
 
         $user = $this->userModel->findByEmail($data['email']);
-
+    
         if (!$user || !password_verify($data['senha'], $user['senha'])) {
             $response->getBody()->write("Email ou senha inválidos");
             return $response->withStatus(401);
@@ -54,9 +53,16 @@ class AuthController
             'tipo' => $user['tipo']
         ];
 
-        $response->getBody()->write("Login realizado com sucesso");
+        // 🔥 REDIRECIONAMENTO POR TIPO
+        if ($user['tipo'] === 'crianca') {
+            $rota = '/criar-carta'; // criar/visualizar própria carta
+        } else {
+            $rota = '/cartas-view'; // listar cartas para doação
+        }
 
-        return $response;
+        return $response
+            ->withHeader('Location', $rota)
+            ->withStatus(302);
     }
 
     public function register(Request $request, Response $response)
@@ -65,6 +71,18 @@ class AuthController
 
         try {
 
+            // 🔒 Validação básica
+            if (
+                empty($data['nome']) ||
+                empty($data['email']) ||
+                empty($data['senha']) ||
+                empty($data['tipo'])
+            ) {
+                throw new \Exception("Preencha todos os campos obrigatórios.");
+            }
+
+            
+            // 💾 Cria usuário
             $id = $this->userModel->create([
                 'nome' => $data['nome'],
                 'idade' => $data['idade'] ?? null,
@@ -74,16 +92,32 @@ class AuthController
                 'telefone' => $data['telefone'] ?? null,
                 'endereco' => $data['endereco'] ?? null
             ]);
+            // 🔥 CRIA SESSÃO (auto login)
+            $_SESSION['user'] = [
+                'id' => $id,
+                'nome' => $data['nome'],
+                'tipo' => $data['tipo']
+            ];
+            // 🔁 Redirecionamento por tipo
+            if ($data['tipo'] === 'crianca') {
+                $rota = '/criar-carta';
+            } else {
+                $rota = '/cartas-view';
+            }
 
-            $response->getBody()->write("Usuário criado com ID: " . $id);
-
-            return $response->withStatus(201);
+            return $response
+                ->withHeader('Location', $rota)
+                ->withStatus(302);
 
         } catch (\Exception $e) {
 
-            $response->getBody()->write($e->getMessage());
+            $response->getBody()->write(json_encode([
+                'error' => $e->getMessage()
+            ]));
 
-            return $response->withStatus(400);
+            return $response
+                ->withStatus(400)
+                ->withHeader('Content-Type', 'application/json');
         }
     }
 }

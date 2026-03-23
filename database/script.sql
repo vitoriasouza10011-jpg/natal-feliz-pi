@@ -1,9 +1,6 @@
 PRAGMA foreign_keys = ON;
 
--- =========================
--- TABELA DE USUÁRIOS
--- =========================
-CREATE TABLE IF NOT EXISTS usuarios (
+CREATE TABLE usuarios (
     id_usuario INTEGER PRIMARY KEY AUTOINCREMENT,
     nome TEXT NOT NULL,
     idade INTEGER,
@@ -15,25 +12,22 @@ CREATE TABLE IF NOT EXISTS usuarios (
     data_criacao DATETIME DEFAULT CURRENT_TIMESTAMP
 );
 
--- =========================
--- TABELA DE CARTAS
--- =========================
-CREATE TABLE IF NOT EXISTS cartas (
-    id_carta INTEGER PRIMARY KEY AUTOINCREMENT,
-    id_crianca INTEGER NOT NULL,
-    titulo TEXT NOT NULL,
-    conteudo TEXT NOT NULL,
+
+-- cartas definition
+
+CREATE TABLE "cartas" (
+    id_carta INTEGER PRIMARY KEY,
+    id_crianca INTEGER,
+    titulo TEXT,
+    conteudo TEXT,
+    status TEXT CHECK(status IN ('aguardando','adotada','entregue','agradecida')),
     mensagem_agradecimento TEXT,
-    data_criacao DATETIME DEFAULT CURRENT_TIMESTAMP,
-    status TEXT NOT NULL DEFAULT 'aguardando'
-        CHECK (status IN ('aguardando','adotada','entregue')),
-    FOREIGN KEY (id_crianca) REFERENCES usuarios(id_usuario)
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP
 );
 
--- =========================
--- TABELA DE DOAÇÕES
--- =========================
-CREATE TABLE IF NOT EXISTS doacoes (
+-- doacoes definition
+
+CREATE TABLE doacoes (
     id_doacao INTEGER PRIMARY KEY AUTOINCREMENT,
     id_doador INTEGER NOT NULL,
     id_carta INTEGER NOT NULL UNIQUE,
@@ -42,7 +36,7 @@ CREATE TABLE IF NOT EXISTS doacoes (
     mensagem_doador TEXT,
     data_doacao DATETIME DEFAULT CURRENT_TIMESTAMP,
     status TEXT NOT NULL DEFAULT 'confirmada'
-        CHECK (status IN ('confirmada','entregue')),
+        CHECK (status IN ('confirmada','entregue')), entregue BOOLEAN DEFAULT 0,
     FOREIGN KEY (id_doador) REFERENCES usuarios(id_usuario),
     FOREIGN KEY (id_carta) REFERENCES cartas(id_carta)
 );
