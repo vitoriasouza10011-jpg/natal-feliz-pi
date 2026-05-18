@@ -13,7 +13,6 @@ O sistema gerencia todo o fluxo: desde a criação da carta pela criança, passa
 | Nome |
 |------|
 | Henrique Ribeiro Velloso |
-| Julia Sabrina da Rocha Leitão |
 | Leticia Oliveira Murat |
 | Pedro Gabriel Faria Vieira |
 | Gabriel Costa Prado |
