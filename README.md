@@ -1,95 +1,248 @@
-# 🎅 Natal Feliz
+# Natal Feliz - Sistema de Cartas de Natal
 
-O **Natal Feliz** é uma plataforma web desenvolvida para conectar **doadores** a **crianças em situação de vulnerabilidade econômica**, permitindo que pessoas interessadas apadrinhem crianças e realizem doações de presentes de Natal.  
-O objetivo do sistema é promover solidariedade, empatia e inclusão social por meio da tecnologia.
+## 📖 Sobre o Projeto
 
----
+O **Natal Feliz** é uma plataforma web que conecta crianças e doadores em um ambiente seguro e acolhedor, permitindo que crianças escrevam suas cartinhas de Natal e doadores as adotem para realizar seus desejos.
 
-## 🧰 Tecnologias Utilizadas
-
-- **PHP** — Back-end e servidor embutido  
-- **SQLite** — Banco de dados leve e local  
-- **HTML5** — Estrutura das páginas  
-- **CSS3** — Estilização e layout responsivo  
-- **JavaScript (Vanilla)** — Interatividade e lógica de front-end  
+O sistema gerencia todo o fluxo: desde a criação da carta pela criança, passando pela adoção por um doador, até a confirmação de entrega e o agradecimento final.
 
 ---
 
-## ⚙️ Como Executar o Projeto
+## 👥 Autores
 
-1. **Clone este repositório:**
-   ```bash
-   git clone https://github.com/seu-usuario/natalfeliz.git
-   ```
-2. **Acesse o diretório do projeto:**
-   ```bash
-   cd natalfeliz
-   ```
-3. **Inicie o servidor embutido do PHP:**
-   ```bash
-   php -S localhost:8080 -t .
-   ```
-4. **Abra o navegador e acesse:**
-   ```
-   http://localhost:8080
-   ```
+| Nome |
+|------|
+| Henrique Ribeiro Velloso |
+| Julia Sabrina da Rocha Leitão |
+| Leticia Oliveira Murat |
+| Pedro Gabriel Faria Vieira |
+| Gabriel Costa Prado |
+| Thaynata Teixeira da Silva |
+| Vitoria Souza Alves da Silva |
+| Nicolas Pantoja Bandeira |
 
 ---
 
-## 🗃️ Estrutura de Pastas
+## 🚀 Tecnologias Utilizadas
+
+- **PHP 8.0+**
+- **Slim Framework 4** - Micro-framework para rotas e middleware
+- **PHP-DI** - Container de injeção de dependências
+- **SQLite** - Banco de dados leve e embarcado
+- **Composer** - Gerenciador de dependências
+
+---
+
+## 📁 Estrutura do Projeto
 
 ```
-📦 natalfeliz
- ┣ 📂 assets/          # Arquivos estáticos (CSS, JS, imagens)
- ┣ 📂 database/        # Arquivo SQLite e scripts de criação de tabelas
- ┣ 📂 includes/        # Arquivos PHP auxiliares (conexão, funções etc.)
- ┣ 📜 index.php        # Página inicial do sistema
- ┣ 📜 README.md        # Documentação do projeto
- ┗ 📜 .gitignore
+natal-feliz-pi-v2/
+├── public/
+│   └── index.php              # Entry point da aplicação
+├── src/
+│   ├── Controllers/           # Controladores da aplicação
+│   │   ├── AuthController.php
+│   │   ├── CartaController.php
+│   │   ├── DoacaoController.php
+│   │   └── HomeController.php
+│   ├── Models/                # Modelos de dados
+│   │   ├── User.php
+│   │   ├── Carta.php
+│   │   └── Doacao.php
+│   ├── Database/              # Configuração do banco
+│   │   └── Database.php
+│   └── Helpers/               # Classes auxiliares
+│       └── View.php
+├── routes/
+│   └── web.php                # Definição das rotas
+├── database/
+│   └── database.sqlite        # Arquivo do banco de dados
+├── views/                     # Templates HTML
+├── composer.json
+└── composer.lock
 ```
 
 ---
 
-## 🧩 Banco de Dados
+## 🗄️ Estrutura do Banco de Dados
 
-O projeto utiliza SQLite, com o arquivo de banco localizado em:
+### Tabela `usuarios`
+| Campo | Tipo | Descrição |
+|-------|------|-----------|
+| id_usuario | INTEGER PRIMARY KEY | Identificador único |
+| nome | TEXT | Nome completo |
+| idade | INTEGER | Idade |
+| email | TEXT (UNIQUE) | E-mail para login |
+| senha | TEXT | Hash da senha |
+| tipo | TEXT | `crianca`, `doador` ou `admin` |
+| endereco | TEXT | Endereço (opcional) |
+| telefone | TEXT | Telefone (opcional) |
 
+### Tabela `cartas`
+| Campo | Tipo | Descrição |
+|-------|------|-----------|
+| id_carta | INTEGER PRIMARY KEY | Identificador único |
+| id_crianca | INTEGER FK | Referência ao usuário criança |
+| titulo | TEXT | Título da cartinha |
+| conteudo | TEXT | Conteúdo da carta |
+| status | TEXT | `aguardando`, `adotada`, `entregue`, `agradecida` |
+| mensagem_agradecimento | TEXT | Mensagem de agradecimento |
+| created_at | TIMESTAMP | Data de criação |
+
+### Tabela `doacoes`
+| Campo | Tipo | Descrição |
+|-------|------|-----------|
+| id_doacao | INTEGER PRIMARY KEY | Identificador único |
+| id_doador | INTEGER FK | Referência ao doador |
+| id_carta | INTEGER FK | Referência à carta adotada |
+| entregue | BOOLEAN | Indica se foi entregue |
+
+---
+
+## 🔄 Fluxo da Aplicação
+
+### 👶 Para Crianças
+1. **Cadastro** como tipo `crianca`
+2. **Criação da carta** - Cada criança pode ter apenas uma carta ativa
+3. **Acompanhamento** - Visualiza o status da sua carta
+4. **Confirmação de entrega** - Quando receber o presente
+5. **Agradecimento** - Envia mensagem de agradecimento ao doador
+
+### 🎅 Para Doadores
+1. **Cadastro** como tipo `doador`
+2. **Visualização** - Lista todas as cartas disponíveis (`aguardando`)
+3. **Adoção** - Escolhe uma carta para realizar o desejo
+4. **Status muda** para `adotada`
+
+### 📊 Status das Cartas
+| Status | Significado |
+|--------|-------------|
+| `aguardando` | Carta criada, aguardando adoção |
+| `adotada` | Carta foi adotada, aguardando entrega |
+| `entregue` | Presente entregue, aguardando agradecimento |
+| `agradecida` | Criança já agradeceu, ciclo concluído |
+
+---
+
+## 🛠️ Instalação e Configuração
+
+### Pré-requisitos
+- PHP 8.0 ou superior
+- Composer
+- Extensão PDO SQLite habilitada
+
+### Passos
+
+1. **Clone o repositório**
+```bash
+git clone https://github.com/seu-usuario/natal-feliz-pi-v2.git
+cd natal-feliz-pi-v2
 ```
-/database/natalfeliz.db
+
+2. **Instale as dependências**
+```bash
+composer install
 ```
 
-Você pode alterar o caminho do banco no arquivo de configuração (por exemplo, `config.php`).
+3. **Configure o banco de dados**
+```bash
+# Crie o diretório database se não existir
+mkdir -p database
+
+# O arquivo database.sqlite será criado automaticamente na primeira execução
+```
+
+4. **Crie as tabelas** (execute no terminal interativo do PHP ou via script)
+```sql
+-- Tabela usuarios
+CREATE TABLE usuarios (
+    id_usuario INTEGER PRIMARY KEY AUTOINCREMENT,
+    nome TEXT NOT NULL,
+    idade INTEGER,
+    email TEXT UNIQUE NOT NULL,
+    senha TEXT NOT NULL,
+    tipo TEXT CHECK(tipo IN ('crianca', 'doador', 'admin')) NOT NULL,
+    endereco TEXT,
+    telefone TEXT
+);
+
+-- Tabela cartas
+CREATE TABLE cartas (
+    id_carta INTEGER PRIMARY KEY AUTOINCREMENT,
+    id_crianca INTEGER NOT NULL,
+    titulo TEXT NOT NULL,
+    conteudo TEXT NOT NULL,
+    status TEXT CHECK(status IN ('aguardando', 'adotada', 'entregue', 'agradecida')) DEFAULT 'aguardando',
+    mensagem_agradecimento TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (id_crianca) REFERENCES usuarios(id_usuario)
+);
+
+-- Tabela doacoes
+CREATE TABLE doacoes (
+    id_doacao INTEGER PRIMARY KEY AUTOINCREMENT,
+    id_doador INTEGER NOT NULL,
+    id_carta INTEGER NOT NULL,
+    entregue BOOLEAN DEFAULT 0,
+    FOREIGN KEY (id_doador) REFERENCES usuarios(id_usuario),
+    FOREIGN KEY (id_carta) REFERENCES cartas(id_carta)
+);
+```
+
+5. **Configure o servidor web**
+```bash
+# Usando o servidor embutido do PHP
+php -S localhost:8000 -t public
+```
+
+6. **Acesse a aplicação**
+```
+http://localhost:8000
+```
 
 ---
 
-## 🚀 Funcionalidades
+## 📋 Rotas da Aplicação
 
-- Cadastro e listagem de crianças
-- Cadastro e listagem de doadores
-- Associação entre doadores e crianças (apadrinhamento)
-- Gerenciamento de ONGs e parcerias
-- Interface amigável e intuitiva em HTML, CSS e JavaScript
-- Painel administrativo (em desenvolvimento)
+| Método | Rota | Descrição |
+|--------|------|-----------|
+| GET | `/` | Página inicial |
+| GET | `/login` | Tela de login |
+| GET | `/register` | Tela de cadastro |
+| POST | `/login` | Processa login |
+| POST | `/register` | Processa cadastro |
+| GET | `/criar-carta` | Formulário para criar carta (criança) |
+| POST | `/criar-carta` | Salva nova carta |
+| GET | `/minha-carta` | Visualiza própria carta (criança) |
+| GET | `/cartas-view` | Lista cartas disponíveis (doador) |
+| GET | `/api/cartas` | API - Lista cartas disponíveis |
+| POST | `/doacao/adotar/{id}` | Adota uma carta |
+| POST | `/carta/confirmar-entrega/{id}` | Confirma entrega (criança) |
+| POST | `/carta/agradecer/{id}` | Envia agradecimento |
 
 ---
 
-## 💡 Sugestões de Melhoria
+## 🔐 Segurança
 
-- Adicionar autenticação de login para administradores e ONGs
-- Implementar upload de fotos das crianças e comprovantes de doação
-- Melhorar o design com framework moderno (Bootstrap ou Tailwind)
-- Disponibilizar versão online (deploy) em servidor PHP
+- **Senhas** armazenadas com `password_hash()` (bcrypt)
+- **Sessões** gerenciadas via `session_start()`
+- **Validação de permissões** por tipo de usuário em cada rota
+- **SQL Injection** prevenido com prepared statements
 
 ---
 
-## 👩‍💻 Autora
+## 🧪 Possíveis Melhorias Futuras
 
-Desenvolvido por:
-Henrique Ribeiro Velloso
-Julia Sabrina da Rocha Leitão
-Leticia Oliveira Murat
-Pedro Gabriel Faria Vieira
-Gabriel Costa Prado
-Thaynata Teixeira da Silva
-Vitoria Souza Alves da Silva 
-📧 vitoriasouza10011@gmail.com  
+- [ ] Interface gráfica com Bootstrap/Tailwind
+- [ ] Envio de e-mails para notificações
+- [ ] Dashboard administrativo
+- [ ] Upload de imagens (fotos dos presentes)
+- [ ] Chat entre doador e criança
+- [ ] Relatórios de adoções
+- [ ] Testes automatizados (PHPUnit)
+
+---
+
+## 📄 Licença
+
+Projeto acadêmico desenvolvido para fins educacionais.
